@@ -1,0 +1,93 @@
+//Polymorphism
+//1. What does the word 'polymorphism' mean?
+
+//Things can have 'many forms'. A Vehicle could be a lorry, a car, a bike. It could also be a Commercial Vehicle or a Domestic Vehicle.
+
+//2.i. What does it mean when we apply polymorphism to OO design?
+
+//The word polymorphism is  a concept used in various contexts. It describes situations in which something occurs in several different forms. Basically objects of different types can be accessed through the same interface. Each type can provide its own, independent implementation of this interface.
+
+//2.ii. Give a simple Java example.
+
+//This is an example from this afternoons our code-along on polymorphism. Where the use of the IConnect Interface enables the Network to hold an ArrayList of devices of alltypes and see them as IConnect objects.
+
+```import java.util.*;
+
+public class Network {
+    private String name;
+    private ArrayList<IConnect> devices;
+    private int maxItems;
+
+    public Network(String name, int maxItems){
+        this.devices = new ArrayList<IConnect>();
+        this.name = name;
+        this.maxItems = maxItems;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public int deviceCount(){
+        return devices.size();
+    }
+
+    public void connect(IConnect device){
+        if (this.calculateAvailableConnections() > 0) {
+            devices.add(device);
+        }
+    }
+
+    public void disconnectAll(){
+        devices.clear();
+    }
+
+    public int getMaxItems() {
+        return maxItems;
+    }
+
+    public int calculateAvailableConnections() {
+        return this.maxItems - deviceCount();
+    }
+}```
+
+//3. What can we use to implement polymorphism in Java?
+
+//Polymorphism can be implemented in Java using abstract class/s, children classes (that inherit from the abstract parent/s); and an interface/s so that each type can provide it's own implementation.
+
+//4. How many 'forms' can an object take when using polymorphism?
+
+//Many.
+
+//5. Give an example of when you could use polymorphism.
+
+//Polymorphism can be used Model a "People in the Office Tracker".
+//An Office can have many types of people in it.
+//Each type of person could have their own class and "The Office" could hold an ArrayList for each.
+//Using an Abstract Class for PEOPLE we can ensure that the child Classes that extend from PEOPLE (Employees, Delivery People, Maintenance Contractors) inherit basic characteristics and functions; but each can add their own and overwrite or modify as each case might demand.
+//Using an Interface IPersonInOffice and implementing it in all the child Classes (Employees, Delivery People, Maintenance Contractors) will enable us to pass IPersonInOffice objects for each type in to the PeopleInOffice ArrayList<IPersonInOffice IPerson>.
+
+//Composition
+//6. What do we mean by 'composition' in reference to object-oriented programming?
+
+//In OO programming Composition describes a class that references one or more objects of other classes in instance variables. This allows us to model has-a associations between objects.E.G. In todays lab A car was composed of a number of other objects (engine, chassis, wheels...).
+
+//7. When would you use composition? Provide a simple example in Java.
+
+//You would use Composition...
+//When an object has a number of component parts (e.g. Car has an engine, a chassis... OR a Bike has; handlebars, brakes, frame, forks, wheels...
+//To Reuse existing code - write less repetitive code.
+//To Change the implementation of a class used in a composition without adapting any external clients (E.G. Add additional features & behaviours to components without too many inheritance issues).
+//Where the component parts may have quite different or differing behaviours that would get tricky and would weigh you down if you were using inheritance.
+//To get less complicated access to a more diverse array of bespoke component behaviours.
+
+//8. What is/are the advantage(s) of using composition?
+
+//Composition allows us
+//To reuse existing code - write less repetitive code.
+//To make bespoke changes without getting weighed down by inheriting features or behaviours that are a stretch to apply.
+//To get easy access to component class objects and their behaviours with ease.
+
+//9. When an object is destroyed, what happens to all the objects it is composed of?
+
+//When we assign an object to be a part of another object e.g. when we assign an Peddle object to the Bicycle class object, then we are handing ownership of our Peddle object to the Bicycle object.If the Bicycle class object is destroyed all objects that it is composed of, are also destroyed (Peddles, Frame, Wheels, Brakes...).
